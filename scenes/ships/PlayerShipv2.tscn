@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/fonts/Candarab.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/ships/ShipRigidBody.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ships/PlayerShip.gd" type="Script" id=3]
+[ext_resource path="res://resources/models/spaceship002.glb" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ships/PlayerShipv2.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://scenes/ships/VelocityMarker.gd" type="Script" id=6]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 1 )
+
+[node name="PlayerShip" instance=ExtResource( 4 )]
+script = ExtResource( 3 )
+
+[node name="ShipRigidBody" type="RigidBody" parent="." index="0"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ShipRigidBody" index="0"]
+transform = Transform( 5, 0, 0, 0, 1, 0, 0, 0, 4, 0, -0.13225, 1.26022 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="ShipRigidBody" index="1"]
+transform = Transform( -1, -1.77636e-15, -8.74228e-08, -2.7974e-08, 0.947423, 0.319985, 8.28263e-08, 0.319985, -0.947423, 0, 3.02812, -10.5773 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ShipRigidBody" index="2"]
+mesh = ExtResource( 5 )
+material/0 = null
+
+[node name="VelocityMarker" type="CSGCylinder" parent="ShipRigidBody" index="3"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -5 )
+radius = 0.1
+sides = 12
+script = ExtResource( 6 )
+
+[node name="SpeedLabel" type="Label" parent="." index="1"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 2 )
+text = "Speed: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cube" parent="." index="2"]
+visible = false
