@@ -6,9 +6,9 @@ extends RigidBody
 # var b = "text"
 
 const THRUST_MULTI = 500.0
-const ROLL_MULTI = 150.0
-const PITCH_MULTI = 200.0
-const YAW_MULTI = 100.0
+const ROLL_MULTI = 250.0
+const PITCH_MULTI = 250.0
+const YAW_MULTI = 150.0
 
 const LS_HORZ = JOY_AXIS_0
 const LS_VERT = JOY_AXIS_1
@@ -39,6 +39,11 @@ func _process(delta):
 	var basis = get_global_transform().basis
 	_update_kinematic_fields(basis)
 	
+	if Input.is_key_pressed(KEY_BACKSPACE):
+		set_linear_velocity(Vector3(0, 0, 0))
+		set_angular_velocity(Vector3(0, 0, 0))
+		return
+	
 	var torque = Vector3(0, 0, 0)
 	
 	var thr = -1 * _activate(Input.get_joy_axis(0, LS_VERT))
@@ -50,8 +55,6 @@ func _process(delta):
 	torque.x = pitch * PITCH_MULTI * delta
 	torque.y = -yaw * YAW_MULTI * delta
 	torque.z = roll * ROLL_MULTI * delta
-	
-	var thrust = get_global_transform().basis.z * thr
 	
 	add_torque(basis.xform(torque))
 

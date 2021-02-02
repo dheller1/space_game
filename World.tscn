@@ -87,3 +87,12 @@ margin_bottom = 530.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Moon" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -90.5639, 30.5529, 155.069 )
+radius = 112.61
+radial_segments = 50
+rings = 100
+
+[node name="FixedDebugCamera" type="Camera" parent="."]
+transform = Transform( -4.3142e-08, 0.16088, -0.986974, 7.0323e-09, 0.986974, 0.16088, 1, 0, -4.37114e-08, -31.5888, 4.16221, 8.18267 )
